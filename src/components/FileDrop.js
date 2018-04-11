@@ -60,7 +60,8 @@ class FileDrop extends Component {
             width: "60%",
             margin: "0 auto",
             minHeight: "275px",
-            border: "4px dashed #e1e4e8"
+            border: "5px dashed #e1e4e8",
+            borderRadius: "12px"
           }}
           accept={"image/png" || "image/jpg"}
           onDrop={this.onDrop}

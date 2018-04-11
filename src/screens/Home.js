@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { Header, FileDrop, FilesList } from "../components";
+import moment from "moment";
+import { Header, FileDrop, FilesList, UploadedList } from "../components";
 
 const Screen = styled.div`
   min-height: 100vh;
@@ -35,7 +36,8 @@ const UploadButton = styled.button`
 
 class Home extends Component {
   state = {
-    filesToUpload: []
+    filesToUpload: [],
+    uploadedFiles: []
   };
 
   componentDidMount() {
@@ -56,18 +58,26 @@ class Home extends Component {
     let data = new FormData();
     // eslint-disable-next-line
     files.map(file => {
-      data.append("file-drop", file, file.name);
+      data.append("file-drop", file, moment.now());
     });
 
     if (files.length === 1) {
       axios
         .post("upload", data)
-        .then(res => console.log(res))
+        .then(res => {
+          this.setState(prevState => ({
+            uploadedFiles: [...prevState.uploadedFiles, ...res.data.names]
+          }));
+        })
         .catch(e => console.log(e));
     } else if (files.length > 1) {
       axios
         .post("upload-multiple", data)
-        .then(res => console.log(res))
+        .then(res => {
+          this.setState(prevState => ({
+            uploadedFiles: [...prevState.uploadedFiles, ...res.data.names]
+          }));
+        })
         .catch(e => console.log(e));
     }
   };
@@ -84,6 +94,7 @@ class Home extends Component {
         <Container>
           <UploadButton onClick={this.uploadImages}>Upload Files</UploadButton>
         </Container>
+        <UploadedList files={this.state.uploadedFiles} />
       </Screen>
     );
   }
