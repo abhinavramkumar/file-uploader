@@ -28,13 +28,21 @@ const Logo = styled.div`
   }
 `;
 
+const Brand = styled.h1`
+  font-family: ${props => props.theme.fonts.pts};
+  font-weight: ${props => props.theme.fonts.bold};
+  font-size: 1.75rem;
+  line-height: calc(1.75 * 1.414rem);
+`;
+
 class Header extends Component {
   render() {
     return (
       <Wrapper>
         <Container>
           <Logo>
-            <img src="" alt="" />
+            {/* <img src="" alt="" /> */}
+            <Brand>Drag N Drop</Brand>
           </Logo>
         </Container>
       </Wrapper>

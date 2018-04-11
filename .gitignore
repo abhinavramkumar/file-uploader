@@ -2,10 +2,12 @@
 
 # dependencies
 /node_modules
+fonts
 
 # testing
 /coverage
 __tests__
+
 
 # production
 /build

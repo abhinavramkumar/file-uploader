@@ -1,4 +1,5 @@
 import Header from "./Header";
 import FileDrop from "./FileDrop";
+import FilesList from "./FilesList";
 
-export { Header, FileDrop };
+export { Header, FileDrop, FilesList };
